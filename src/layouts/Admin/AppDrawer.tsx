@@ -4,12 +4,11 @@ import { useRouter } from "next/router";
 import useMenuItems from "@/hooks/useMenuItems";
 import Collapse from "@/components/Collapse";
 import { SiGooglescholar } from "react-icons/si";
-import dynamic from "next/dynamic";
-import "react-tooltip/dist/react-tooltip.css";
+import Tooltip from '@mui/material/Tooltip';
 
-const Tooltip = dynamic(() => import("react-tooltip").then((mod) => mod.Tooltip), {
-  ssr: false,
-});
+// const Tooltip = dynamic(() => import("react-tooltip").then((mod) => mod.Tooltip), {
+//   ssr: false,
+// });
 
 type MenuItemsType = {
   haveGroup?: boolean;
@@ -36,6 +35,8 @@ const AppDrawer = ({
   const [selectedItem, setSelectedItem] = useState<string | null>(null);
   const menuItems = useMenuItems();
   const { push, asPath } = useRouter();
+  const router = useRouter();
+  const currentPath = router.pathname;
 
   const handleMatchOpen = (title: string, route?: string, submenu?: any[]) => {
     if (!submenu) {
@@ -91,7 +92,7 @@ const AppDrawer = ({
                   <div
                     onClick={() => handleMatchOpen(menuItem?.title, menuItem?.route, menuItem?.submenu)}
                     className={`w-full relative font-medium px-2 group hover:bg-white hover:text-primary flex items-center justify-between py-2.5 cursor-pointer rounded-xl ${
-                      selectedItem === menuItem?.title || open === menuItem?.title
+                      selectedItem === menuItem?.title || open === menuItem?.title || currentPath === menuItem?.route
                         ? "bg-white text-primary"
                         : "text-secondary"
                     } ${isAppDrawerOpen ? "pr-2" : ""}`}
@@ -104,25 +105,24 @@ const AppDrawer = ({
                       }`}
                     >
                       <div
-                        className={`relative ${
-                          selectedItem === menuItem?.title || open === menuItem?.title
-                            ? "text-2xl flex items-center justify-center text-primary"
-                            : "text-2xl"
-                        }`}
-                      >
-                        {menuItem?.icon}
-                      </div>
-                      {!isAppDrawerOpen && (
-                        <Tooltip
-                          id={`tooltip-${index}`}
-                          place="right"
-                          offset={10}
-                          delayShow={200}
-                          className="absolute left-full -translate-x-2/5"
+                          className={`relative ${
+                            selectedItem === menuItem?.title || open === menuItem?.title || currentPath === menuItem?.route
+                              ? "text-2xl flex items-center justify-center text-primary"
+                              : "text-2xl"
+                          }`}
                         >
-                          {menuItem?.title}
-                        </Tooltip>
-                      )}
+                          <Tooltip title={menuItem?.title} placement="left" className="" arrow>
+                            <div
+                              className={`relative ${
+                                selectedItem === menuItem?.title || open === menuItem?.title || currentPath === menuItem?.route
+                                  ? "text-2xl flex items-center justify-center text-primary"
+                                  : "text-2xl"
+                              }`}
+                            >
+                              {menuItem?.icon}
+                            </div>
+                          </Tooltip>
+                        </div>
 
                       {/* Title */}
                       {isAppDrawerOpen ? (

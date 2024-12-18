@@ -4,6 +4,7 @@ import { MdOutlineComputer } from "react-icons/md";
 import { AdminLayout } from "@/layouts";
 import { CiTimer } from "react-icons/ci";
 import LeadColumnUserGraph from "@/components/LeadColumnUserGraph";
+import DashboardPieChart from "@/components/DashboardPieChart";
 
 
 export default function AdminDashboardCard() {
@@ -38,6 +39,11 @@ export default function AdminDashboardCard() {
             { userRole: 'December', count: 82 }
         ]
     }
+};
+
+const defaultUserData = {
+  totalMaleUser: 100,  // Default male user count
+  totalFemaleUser: 15  // Default female user count
 };
 
   return (
@@ -119,11 +125,11 @@ export default function AdminDashboardCard() {
           </div>
         </div>
       </section>
-     <section className="grid grid-cols-12">
+     <section className="grid grid-cols-12 gap-5">
      <article className="bg-white p-6 rounded-xl shadow-xl col-span-6">
           <div className="text-lg font-semibold">Exam Score Overview</div>
           <LeadColumnUserGraph
-              barHeight={340}
+              barHeight={300}
               categories={defaultData.data.roleWiseUsers.map((data) => data.userRole)}
               series={[
                   {
@@ -134,6 +140,18 @@ export default function AdminDashboardCard() {
               colors={["#62a8ea", "#613d7c"]}
           />
       </article>
+      <aside className="flex gap-4 flex-col col-span-6 h-fit p-6 shadow-xl rounded-xl bg-white">
+        <div className="text-lg font-semibold">Total Time Spent</div>
+        <div className="flex justify-center items-center py-3">
+            <DashboardPieChart
+                pieSeries={[
+                    defaultUserData.totalMaleUser,
+                    defaultUserData.totalFemaleUser,
+                ]}
+                pieLabel={["Total Time", "Time Spent"]}
+            />
+        </div>
+    </aside>
      </section>
 
      </div>
