@@ -25,7 +25,7 @@ const ResponsiveAppDrawer = ({
   const handleLogout = () => {
     setResponsiveExpand(false);
     // logout();
-    push("/");
+    push("");
   };
 
   return (

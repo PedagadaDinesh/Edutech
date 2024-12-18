@@ -35,7 +35,7 @@ const AdminLayout = ({
   useEffect(() => {
     // console.log("user at useEffect---", user);
     mounted.current = true;
-    if (!accessToken) push("/");
+    if (!accessToken) push("");
 
     return () => {
       mounted.current = false;

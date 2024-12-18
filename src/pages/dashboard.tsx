@@ -250,8 +250,8 @@ const dashboard = () => {
       </div>
         
         </section>
-        <article className="gap-5 lg:grid grid-cols-11 flex flex-col">
-          <aside className=" col-span-7 h-fit bg-white shadow-lg rounded-xl">
+        <article className="gap-5 lg:grid grid-cols-12 flex flex-col">
+          <aside className=" col-span-8 h-fit bg-white shadow-lg rounded-xl">
             <div className="px-5 pt-5 text-lg font-semibold">
               Monthly Streak Analytics in this year
             </div>

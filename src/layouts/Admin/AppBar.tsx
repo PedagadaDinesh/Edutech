@@ -138,7 +138,7 @@ const ProfileBox = () => {
       text: "Logout Successfully",
       icon: "success",
     });
-    push("/dashboard");
+    push("");
   };
 
   return (
